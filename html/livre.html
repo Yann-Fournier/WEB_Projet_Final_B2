@@ -12,6 +12,33 @@
 <body>
     <div id="header"></div>
 
+    <div class="background-flou" id="collection">
+        <div class="collection">
+            <div class="top-list-collection">
+                <h3 class="vos-collections">Vos collections</h3>
+                <button class="bouton-croix" id="bouton-croix">
+                    <img src="../img/croix.png" alt="croix" class="croix">
+                </button>
+            </div>
+            <div class="list-collection">
+                <div class="item">
+                    <div class="collection-name">Truc</div>
+                    <input type="checkbox" class="checkbox">
+                </div>
+                <div class="item">
+                    <div class="collection-name">Bidule</div>
+                    <input type="checkbox" class="checkbox">
+                </div>
+                <div class="item">
+                    <button class="buAjouterCollection" id="buAjouterCollection">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
     <div class="container">
         <div class="book-details">
             <img src="../img/livre.png" alt="Couverture du Livre">
@@ -23,7 +50,7 @@
                 <p><strong>Description:</strong> Ce livre raconte l'histoire fascinante de personnages captivants dans
                     un monde imaginaire. Plongez dans une aventure pleine de rebondissements et de mystères.</p>
                 <div class="buttons">
-                    <button>Ajouter à une collection</button>
+                    <button id="Add-Livre">Ajouter à une collection</button>
                 </div>
             </div>
         </div>
@@ -39,8 +66,8 @@
             </div>
             <!-- Ajouter plus de commentaires ici -->
             <div>
-                <input type="text" placeholder="Ajouter un commentaire" class="input-text">
-                <button class="boutonAjouter">Ajouter</button>
+                <input type="text" placeholder="Ajouter un commentaire" class="input-text" id="input-text">
+                <button class="boutonAjouter" id="boutonAjouter">Ajouter</button>
             </div>
         </div>
     </div>

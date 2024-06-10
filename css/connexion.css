@@ -50,3 +50,12 @@ body {
 .login-container a:hover {
     text-decoration: underline;
 }
+
+.displayNone {
+    display: none;
+}
+
+.para {
+    color: red;
+    margin: 5px;
+}
