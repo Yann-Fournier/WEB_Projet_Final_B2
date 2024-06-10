@@ -24,9 +24,13 @@ login.addEventListener('click', function () {
     }
 
     if (truc1 && truc2) {
-        console.log(email.value);
-        console.log(password.value);
-        document.cookie = "IsAdmin=" + ("value" || "") + "; path=/";
-        window.location.href = 'accueil.html';
+        // console.log(email.value);
+        // console.log(password.value);
+
+        // Faire la vérification avec la base de données --------------------------------------------------------------
+
+        document.cookie = "IsAdmin=" + ("valueIsAdmin" || "") + "; path=/";
+        document.cookie = "Token=" + ("valueToken" || "") + "; path=/";
+        window.location.href = 'index.html';
     }
 });
