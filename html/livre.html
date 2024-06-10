@@ -10,18 +10,11 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo">Biblio</div>
-        <nav>
-            <a href="index.html">Accueil</a>
-            <a href="profil.html">Profil</a>
-            <a href="connexion.html">Connexion</a>
-            <a href="inscription.html">Inscription</a>
-        </nav>
-    </header>
+    <div id="header"></div>
+
     <div class="container">
         <div class="book-details">
-            <img src="livre1.jpg" alt="Couverture du Livre">
+            <img src="../img/livre.png" alt="Couverture du Livre">
             <div class="book-info">
                 <h1>Titre du Livre</h1>
                 <p><strong>Auteur:</strong> Auteur 1</p>
@@ -30,34 +23,33 @@
                 <p><strong>Description:</strong> Ce livre raconte l'histoire fascinante de personnages captivants dans
                     un monde imaginaire. Plongez dans une aventure pleine de rebondissements et de mystères.</p>
                 <div class="buttons">
-                    <button>Ajouter à la Pile à Lire</button>
-                    <button>Acheter</button>
+                    <button>Ajouter à une collection</button>
                 </div>
             </div>
         </div>
 
         <div class="comments-section">
-            <h2>Commentaires</h2>
             <div class="comment">
+                <img src="../img/profile-picture.png" alt="profil pic" class="profil_pic_comment">
                 <p>Un excellent livre, captivant du début à la fin !</p>
-                <div class="comment-buttons">
-                    <button>👍 Like</button>
-                    <button>👎 Dislike</button>
-                </div>
             </div>
             <div class="comment">
+                <img src="../img/profile-picture.png" alt="profil pic" class="profil_pic_comment">
                 <p>J'ai trouvé l'intrigue un peu prévisible.</p>
-                <div class="comment-buttons">
-                    <button>👍 Like</button>
-                    <button>👎 Dislike</button>
-                </div>
             </div>
             <!-- Ajouter plus de commentaires ici -->
+            <div>
+                <input type="text" placeholder="Ajouter un commentaire" class="input-text">
+                <button class="boutonAjouter">Ajouter</button>
+            </div>
         </div>
     </div>
     <footer>
         <p>&copy; Biblio. Tous droits réservés.</p>
     </footer>
+
+    <script src="../js/livre.js"></script>
+    <script src="../js/header.js"></script>
 </body>
 
 </html>

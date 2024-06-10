@@ -5,35 +5,6 @@ body {
     padding: 0;
 }
 
-header {
-    background-color: #333;
-    color: white;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header .logo {
-    font-size: 1.5em;
-}
-
-header nav {
-    display: flex;
-    gap: 15px;
-}
-
-header nav a {
-    color: white;
-    text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-header nav a:hover {
-    background-color: #555;
-}
-
 .login-container {
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -41,6 +12,7 @@ header nav a:hover {
     width: 300px;
     text-align: center;
     margin: 20px auto;
+    margin-top: 19%;
 }
 
 .login-container h2 {

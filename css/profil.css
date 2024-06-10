@@ -5,35 +5,6 @@ body {
     padding: 0;
 }
 
-header {
-    background-color: #333;
-    color: white;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header .logo {
-    font-size: 1.5em;
-}
-
-header nav {
-    display: flex;
-    gap: 15px;
-}
-
-header nav a {
-    color: white;
-    text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-header nav a:hover {
-    background-color: #555;
-}
-
 .container {
     width: 80%;
     margin: auto;
@@ -51,13 +22,58 @@ h1 {
     margin-bottom: 20px;
 }
 
-.profile-info h2 {
-    margin-bottom: 10px;
+.info-personnel {
+    display: flex;
+    flex-direction: row;
+}
+
+.profil-pic {
+    width: 200px;
+    border-radius: 50%;
+    margin-right: 50px;
 }
 
 .profile-info p {
-    margin: 5px 0;
+    margin: 10px 0;
 }
+
+.collection-livre {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    width: 85%;
+    gap: 10px; 
+}
+
+.buLivre {
+    background-color: #ebebeb;
+    height: 100%;
+    width: 100%;
+    border-style: none;
+}
+
+.photoLivre {
+    margin-top: 5%;
+    width: 90%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .section-title {
     font-size: 20px;
