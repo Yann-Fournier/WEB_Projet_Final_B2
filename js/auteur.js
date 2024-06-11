@@ -74,7 +74,6 @@ function livreAuteur(json) {
         // Ajout d'une action click pour tous les bouton
         boutonLivre.addEventListener('click', function () {
             var valeur = boutonLivre.value;
-            console.log(valeur);
             window.location.href = "livre.html?Id=" + encodeURIComponent(valeur);
         });
 

@@ -90,7 +90,7 @@ fetch(baseURL + "/auteur?aleatoire=50")
 function createAuteur(json) {
     json.forEach(element => {
         var boutonAuteur = document.createElement('button');
-        boutonAuteur.className = "buResultatAuteur";
+        boutonAuteur.className = "buResultatPersonne";
         boutonAuteur.value = element.Id;
 
         // Ajout d'une action click pour tous les bouton
@@ -128,7 +128,7 @@ function createUtilisateur(json) {
     json.forEach(element => {
         if (element.Is_Admin == false) {
             var boutonUtilisateur = document.createElement('button');
-            boutonUtilisateur.className = "buResultatProfil";
+            boutonUtilisateur.className = "buResultatPersonne";
             boutonUtilisateur.value = element.Id;
 
             // Ajout d'une action click pour tous les bouton
