@@ -29,6 +29,8 @@ login.addEventListener('click', function () {
 
         // Faire la vérification avec la base de données --------------------------------------------------------------
 
+        
+
         document.cookie = "IsAdmin=" + ("valueIsAdmin" || "") + "; path=/";
         document.cookie = "Token=" + ("valueToken" || "") + "; path=/";
         window.location.href = 'index.html';
