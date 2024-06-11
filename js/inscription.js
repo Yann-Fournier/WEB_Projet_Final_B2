@@ -1,3 +1,7 @@
+// URL API
+var baseURL = "http://localhost:8080";
+
+// Input et warning
 var nameTKT = document.getElementById('name');
 var nameP = document.getElementById('nameP');
 var email = document.getElementById('email');
@@ -7,6 +11,7 @@ var passwordP = document.getElementById('passwordP');
 var verifPassword = document.getElementById('verifPassword');
 var verifPasswordP = document.getElementById('verifPasswordP');
 var correspPasswordP = document.getElementById('correspPassword');
+var verifEmail = document.getElementById('verifEmail');
 var buInscription = document.getElementById('inscription');
 
 buInscription.addEventListener('click', function () {
@@ -57,14 +62,52 @@ buInscription.addEventListener('click', function () {
     }
 
     if (truc1 && truc2 && truc3 && truc4 && passwordEqual) {
-        // console.log(email.value);
-        // console.log(password.value);
-
         // Faire la création de compte --------------------------------------------------------------
         // Puis récuperer le token et le boolean de la base de données ------------------------------
 
-        document.cookie = "IsAdmin=" + ("valueIsAdmin" || "") + "; path=/";
-        document.cookie = "Token=" + ("valueToken" || "") + "; path=/";
-        window.location.href = 'index.html';
+        fetch(baseURL + "/verif_email?email=" + email.value)
+            .then((response) => {
+                return response.json();
+            }).then((json) => {
+                if (json[0].Count == 0) {
+
+                    // Création du compte
+                    const response = fetch(baseURL + "/user/create?email=" + email.value + "&mdp=" + password.value + "&nom=" + nameTKT.value + "&photo=", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    
+                    // Récuperartion des Token pour l'Auth
+                    fetch(baseURL + "/get_token?email=" + email.value + "&mdp=" + password.value)
+                        .then((response) => {
+                            return response.json();
+                        }).then((json) => {
+                            console.log(json);
+                            if (json.length != 0) {
+                                console.log(json);
+                                document.cookie = "Token=" + (json[0].Token || "") + "; path=/";
+                                if (json[0].Is_Admin) {
+                                    document.cookie = "isConnected=" + ("2" || "") + "; path=/";
+                                } else {
+                                    document.cookie = "isConnected=" + ("1" || "") + "; path=/";
+                                }
+                                document.cookie = "Id=" + (json[0].Id || "") + "; path=/";
+                                window.location.href = 'index.html';
+                            } else {
+                                document.cookie = "Token=" + ("" || "") + "; path=/";
+                                document.cookie = "Id=" + ("" || "") + "; path=/";
+                                document.cookie = "isConnected=" + ("0" || "") + "; path=/";
+                            }
+                        });
+                        verifEmail.className = "displayNone";
+                } else {
+                    document.cookie = "Token=" + ("" || "") + "; path=/";
+                    document.cookie = "Id=" + ("" || "") + "; path=/";
+                    document.cookie = "isConnected=" + ("0" || "") + "; path=/";
+                    verifEmail.className = "para";
+                }
+            });
     }
 });
