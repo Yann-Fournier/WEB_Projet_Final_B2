@@ -59,7 +59,6 @@ function createLivre(json) {
         // Ajout d'une action click pour tous les bouton
         boutonLivre.addEventListener('click', function () {
             var valeur = boutonLivre.value;
-            console.log(valeur);
             window.location.href = "livre.html?Id=" + encodeURIComponent(valeur);
         });
 
@@ -96,7 +95,6 @@ function createAuteur(json) {
         // Ajout d'une action click pour tous les bouton
         boutonAuteur.addEventListener('click', function () {
             var valeur = boutonAuteur.value;
-            console.log(valeur);
             window.location.href = "auteur.html?Id=" + encodeURIComponent(valeur);
         });
 
@@ -134,7 +132,6 @@ function createUtilisateur(json) {
             // Ajout d'une action click pour tous les bouton
             boutonUtilisateur.addEventListener('click', function () {
                 var valeur = boutonUtilisateur.value;
-                console.log(valeur);
                 window.location.href = "profil.html?Id=" + encodeURIComponent(valeur);
             });
 
