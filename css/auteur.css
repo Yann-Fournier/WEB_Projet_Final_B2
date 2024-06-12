@@ -52,7 +52,13 @@ h1 {
     background-color: #ebebeb;
     height: 100%;
     width: 100%;
-    border-style: none;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.buLivre:hover {
+    transform: scale(110%);
+    cursor: pointer;
 }
 
 .photoLivre {

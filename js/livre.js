@@ -13,13 +13,16 @@ var divLivreInfos = document.getElementById('book-details');
 var divInfo = document.getElementById('book-info');
 // Pop up
 var popUp = document.getElementById('collection');
+popUp.className = "displayNone";
 var buCroix = document.getElementById('bouton-croix');
+var divListCollection = document.getElementById('list-collection');
 var buAjouterCollection = document.getElementById('buAjouterCollection');
 // Com
 var divCommentaires = document.getElementById('comments-section');
+var divAjouterCommentaire = document.getElementById('addComment');
 var buAjouterCommentaire = document.getElementById('boutonAjouter');
 
-popUp.className = "displayNone";
+
 
 fetch(baseURL + "/livre?livre_id=" + IdLivre)
     .then((response) => {
@@ -106,7 +109,7 @@ function livreInfos(arrayLivre) {
         popUp.className = "background-flou";
     });
 
-    getAddLivreCollectionButton();
+    verifConnection(bouton);
 
     divInfo.appendChild(titreLivre);
     divInfo.appendChild(strong1);
@@ -131,7 +134,6 @@ fetch(baseURL + "/commentaire?livre_id=" + IdLivre)
     .then((response) => {
         return response.json();
     }).then((json) => {
-        console.log(json);
         createCommentaire(json);
     });
 
@@ -143,6 +145,13 @@ function createCommentaire(arrayCom) {
 
         var buProfil = document.createElement('button');
         buProfil.className = "boutonProfilCom";
+        buProfil.value = element.Id_User;
+
+        // Ajout d'une action click pour tous les bouton
+        buProfil.addEventListener('click', function () {
+            var valeur = buProfil.value;
+            window.location.href = "profil.html?Id=" + encodeURIComponent(valeur);
+        });
 
         var imgProfil = document.createElement('img');
         imgProfil.className = "profil_pic_comment";
@@ -150,7 +159,6 @@ function createCommentaire(arrayCom) {
             .then((response) => {
                 return response.json();
             }).then((json) => {
-                console.log(json);
                 if (json[0].Photo == null || json[0].Photo == "") {
                     imgProfil.src = "../img/default-profil-picture.png";
                 } else {
@@ -168,48 +176,103 @@ function createCommentaire(arrayCom) {
     });
 }
 
+function verifConnection(bouton) {
+    if (isCookieSet("isConnected")) {
+        var connect = getCookieValue("isConnected");
+        if (connect == 0) {
+            bouton.className = "displayNone";
+            divAjouterCommentaire.className = "displayNone";
+        } else {
+            bouton.className = "add-Livre";
+            divAjouterCommentaire.className = "";
+        }
+    } else {
+        bouton.className = "displayNone";
+        divAjouterCommentaire.className = "displayNone";
+    }
+}
+
+buAjouterCommentaire.addEventListener('click', function () {
+    var textBox = document.getElementById('input-text');
+    if (textBox.value != "" || textBox.value != null) {
+        // Création du commmentaire
+        const response = fetch(baseURL + "/commentaire/add?livre_id=" + IdLivre + "&text_commentaire=" + textBox.value, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${getCookieValue("Token")}`,
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+});
+
 // Pop up => Collections
 buCroix.addEventListener('click', function () {
     popUp.className = "displayNone";
 });
 
-buAjouterCollection.addEventListener('click', function () {
-    var collec = document.getElementsByClassName('collection-name');
-    var checkbox = document.getElementsByClassName('checkbox');
-    for (let i = 0; i < collec.length; i++) {
-        console.log(collec[i].innerHTML + " : " + checkbox[i].checked);
+fetch(baseURL + "/collection", {
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${getCookieValue("Token")}`,
+        'Content-Type': 'application/json'
     }
-    popUp.className = "displayNone";
+}).then((response) => {
+    return response.json();
+}).then((json) => {
+    createCollection(json);
 });
 
-// Add Commentaire 
-buAjouterCommentaire.addEventListener('click', function () {
-    var text = document.getElementById('input-text').value;
-    console.log(text);
-});
+function createCollection(arrayCollection) {
+    arrayCollection.forEach(element => {
 
-// Pour recuperer le bouton qui va etre créer :) 
-async function getAddLivreCollectionButton() {
-    for (let i = 0; i < 10; i++) {
-        try {
-            var buAddLivre = document.getElementById('Add-Livre');
+        var divItem1 = document.createElement('div');
+        divItem1.className = "item";
 
-            // Verification de la connection de l'utilisateur
-            if (isCookieSet("isConnected")) {
-                var connect = getCookieValue("isConnected");
-                if (connect == 0) {
-                    buAddLivre.className = "displayNone";
-                    divAjouterCommentaire.className = "displayNone";
-                } else {
-                    buAddLivre.className = "";
-                    divAjouterCommentaire.className = "";
-                }
-            } else {
-                buAddLivre.className = "displayNone";
-                divAjouterCommentaire.className = "displayNone";
+        var nomCollection = document.createElement('div');
+        nomCollection.className = "collection-name";
+        nomCollection.innerHTML = element.Nom;
+        nomCollection.id = element.Id;
+
+        var checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+        checkbox.className = "checkbox";
+        checkbox.id = element.Id;
+
+        divItem1.appendChild(nomCollection);
+        divItem1.appendChild(checkbox);
+        divListCollection.appendChild(divItem1);
+    });
+
+    var divItem2 = document.createElement('div');
+    divItem2.className = "item";
+
+    var boutonAjouter = document.createElement('button');
+    boutonAjouter.className = "buAjouterCollection";
+    boutonAjouter.id = "buAjouterCollection";
+    boutonAjouter.innerHTML = "Ajouter";
+
+    boutonAjouter.addEventListener('click', function () {
+        var collec = document.getElementsByClassName('collection-name');
+        var checkbox = document.getElementsByClassName('checkbox');
+        for (let i = 0; i < collec.length; i++) {
+            // console.log(collec[i].innerHTML + " : " + checkbox[i].checked + " : " + checkbox[i].id);
+            // Ajout du livre aux collection si la checkbox est cochée 
+            if (checkbox[i].checked) {
+                const response = fetch(baseURL + "/collection/add_livre?livre_id=" + IdLivre + "&collection_id=" + checkbox[i].id, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${getCookieValue("Token")}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
             }
-        } catch { }
+        }
+        popUp.className = "displayNone";
+    });
 
-        await delay(100);
-    }
+    divItem2.appendChild(boutonAjouter);
+    divListCollection.appendChild(divItem2);
 }
+
+
