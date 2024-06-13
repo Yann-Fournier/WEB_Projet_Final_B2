@@ -9,6 +9,8 @@ if (IdProfil == null) {
         var connect = getCookieValue("isConnected");
         if (connect == 0) {
             window.location.href = "index.html";
+        } else if (connect == 2 && getCookieValue("Id") == "") {
+            IdProfil = 0;
         } else {
             IdProfil = getCookieValue("Id");
         }
