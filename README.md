@@ -1,10 +1,15 @@
-# To do list 
+# WEB Projet Final B2 (avec Patchouf)
 
-- faire page livre
-- faire page profil (verifier si l'utilisateur veut son profil ou celui d'un autre)
-- faire page admin
+Vous trouverez dans ce repo la base de donnée de notre projet de fin de deuxième année.
 
+- Repository principal : [Projet_Final_B2](https://github.com/Patchouf/Projet_B2)
 
-=> brave.exe --user-data-dir="C://Chrome dev session" --disable-web-security "http://127.0.0.1:5500/WEB_Projet_Final_B2/html/index.html" 
+### Ce repo contient : 
+- Un dossier /html avec chacune des pages HTML du site
+- Un dossier /css avec chacune des pages CSS du site
+- Un dossier /js avec chacune des pages Javascript du site
+- Un dossier /img avec chacune des pages images par défaut du site du site
 
-# WEB_Projet_Final_B
+Le fichier Javascript font des appels vers cette [API](https://github.com/Yann-Fournier/API_Projet_Final_B2). Si vous avez changer l'adresse ou le port du server sur lequel touner l'API ou les routes de l'API, vous devrez alors modifier les fichier Javascript en conséquence. 
+
+Il y a dans chacun des fichier.js l'url de base de l'API que vous pouvez modifier à votre guise. Elle ce trouve tout en haut du fichier. Les routes sont, quand à elles, précisées dans les appels (fetch()) vers l'API
