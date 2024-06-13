@@ -142,6 +142,7 @@ function createCommentaire(arrayCom) {
 
         var divCom = document.createElement('div');
         divCom.className = "comment";
+        divCom.id = element.Id;
 
         var buProfil = document.createElement('button');
         buProfil.className = "boutonProfilCom";
